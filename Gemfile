@@ -2,6 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.11'
 
+gem 'annotate', '2.4.0'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
