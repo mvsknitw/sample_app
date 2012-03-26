@@ -2,7 +2,10 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.11'
 
-gem 'annotate', '2.4.0'
+group :development do
+ gem 'annotate', '2.4.0'
+ gem 'faker', '0.3.1'
+end
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -10,6 +13,7 @@ gem 'annotate', '2.4.0'
 gem 'sqlite3', '1.3.3'
 
 gem 'gravatar_image_tag','1.0.0.pre2'
+gem 'will_paginate', '3.0.pre2'
 
 # Use unicorn as the web server
 # gem 'unicorn'
