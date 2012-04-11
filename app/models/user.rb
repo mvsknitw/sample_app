@@ -45,9 +45,20 @@ class User < ActiveRecord::Base
   end
  
   def feed
-    # This is preliminary. See Chapter 12 for the full implementation.
-    Micropost.where("user_id = ?", id)
+    Micropost.from_users_followed_by(self)
   end
+
+    def follow!(followed)
+      self.relationships.create!(:followed_id => followed.id)
+    end
+
+    def following?(followed)
+      relationships.find_by_followed_id(followed)
+    end
+
+    def unfollow!(followed)
+      relationships.find_by_followed_id(followed).destroy
+    end
 
   private
 
@@ -66,18 +77,6 @@ class User < ActiveRecord::Base
       user = find_by_id(id)
       (user && user.salt == cookie_salt) ? user : nil
     end    
-
-    def following?(followed)
-      relationships.find_by_followed_id(followed)
-    end
-
-    def follow!(followed)
-      self.relationships.create!(:followed_id => followed.id)
-    end
-
-    def unfollow!(followed)
-      relationships.find_by_followed_id(followed).destroy
-    end
 
     def encrypt(string)
       secure_hash("#{salt}--#{string}")
